@@ -10,6 +10,7 @@
 
 window.uexOnload = function() {
 
+    uexDevice.startNetStatusListener();
     uexDevice.onOrientationChange = function(mode){
         if(mode == 1){
             document.getElementById('data').innerHTML ="正竖屏";
@@ -135,6 +136,7 @@ window.uexOnload = function() {
     uexDevice.cbScreenCapture = function(info) {
         alert(info);
     }
+    
     uexDevice.cbGetVolume = function(info) {
         alert(info);
     }
@@ -146,6 +148,10 @@ window.uexOnload = function() {
     }
     uexDevice.cbOpenSetting = function(info){
         alert(info);
+    }
+    
+    uexDevice.onNetStatusChanged = function(info) {
+        alert("onNetStatusChanged:" + info);
     }
 }
 
@@ -257,7 +263,11 @@ window.uexOnload = function() {
 
             <input class="btn" type="button"
                    value="打开设置" onclick="openSetting();">
+            
+            <input class="btn" type="button"
+            value="停止网络监听" onclick="uexDevice.stopNetStatusListener();">
         </div>
+        
     </div>
 </body>
 <script>
